@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
 
+import ScrollTracker from "../components/ScrollTracker"
+
 const HomePage = () => {
     let [showInitialWrapper, setShowInitialWrapper] = useState(true)
 
@@ -17,90 +19,6 @@ const HomePage = () => {
 
         return () => mounted = false
     }, [])
-
-    let [artParallaxOffset, setArtParallaxOffset] = useState(0)
-    let artParallaxRef = useRef()
-
-    let [mathParallaxOffset, setMathParallaxOffset] = useState(0)
-    let mathParallaxRef = useRef()
-
-    let [languageParallaxOffset, setLanguageParallaxOffset] = useState(0)
-    let languageParallaxRef = useRef()
-
-    let [scienceParallaxOffset, setScienceParallaxOffset] = useState(0)
-    let scienceParallaxRef = useRef()
-
-    const handleParallaxEvent = () => {
-        const artBox = artParallaxRef.current.getBoundingClientRect()
-        if(artBox.y < 0){
-            const progress = -artBox.y / 2000
-            const scale = 3000 - window.innerWidth
-
-            if(progress > 1){
-                setArtParallaxOffset(-scale)
-            } else {
-                setArtParallaxOffset(-scale * progress)
-            }
-        } else {
-            setArtParallaxOffset(0)
-        }
-
-        const mathBox = mathParallaxRef.current.getBoundingClientRect()
-        if(mathBox.y < 0){
-            const progress = -mathBox.y / 2000
-            const scale = 3000 - window.innerWidth
-
-            if(progress > 1){
-                setMathParallaxOffset(0)
-            } else {
-                setMathParallaxOffset(-scale * (1 - progress))
-            }
-        } else {
-            setMathParallaxOffset(-3000 + window.innerWidth)
-        }
-
-        //
-
-        const languageBox = languageParallaxRef.current.getBoundingClientRect()
-        if(languageBox.y < 0){
-            const progress = -languageBox.y / 2000
-            const scale = 3000 - window.innerWidth
-
-            if(progress > 1){
-                setLanguageParallaxOffset(-scale)
-            } else {
-                setLanguageParallaxOffset(-scale * progress)
-            }
-        } else {
-            setLanguageParallaxOffset(0)
-        }
-
-        const scienceBox = scienceParallaxRef.current.getBoundingClientRect()
-        if(scienceBox.y < 0){
-            const progress = -scienceBox.y / 2000
-            const scale = 3000 - window.innerWidth
-
-            if(progress > 1){
-                setScienceParallaxOffset(0)
-            } else {
-                setScienceParallaxOffset(-scale * (1 - progress))
-            }
-        } else {
-            setScienceParallaxOffset(-3000 + window.innerWidth)
-        }
-    }
-
-    useEffect(() => {
-        if(!showInitialWrapper){
-            addEventListener("scroll", handleParallaxEvent)
-            addEventListener("resize", handleParallaxEvent)
-
-            return () => {
-                removeEventListener("scroll", handleParallaxEvent)
-                removeEventListener("resize", handleParallaxEvent)
-            }
-        }
-    }, [showInitialWrapper])
 
     return (
         <React.Fragment>
@@ -128,63 +46,62 @@ const HomePage = () => {
             {
                 !showInitialWrapper && (
                     <React.Fragment>
-                        <section ref={artParallaxRef} style={{ height: "calc(100vh + 2000px)" }}>
+                        <ScrollTracker realScrollHeight={2000} TrackingComponent={({ progress }) => (
                             <div className={"sticky-container"}>
                                 <div className={"sticky-header-container art-color"}>
                                     <div className={"art-header"}>Art</div>
                                 </div>
                                 <div className={"sticky-content-wrapper"}>
-                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${artParallaxOffset}px)` }}>
+                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${progress * -(3000 - window.innerWidth)}px)` }}>
                                         {
                                             new Array(1000).fill("art").join(" ")
                                         }
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                        <section ref={mathParallaxRef} style={{ height: "calc(100vh + 2000px)" }}>
+                        )} />
+                        <ScrollTracker realScrollHeight={2000} TrackingComponent={({ progress }) => (
                             <div className={"sticky-container"}>
                                 <div className={"sticky-header-container math-color"}>
                                     <div className={"math-header"}>Mathematics</div>
                                 </div>
                                 <div className={"sticky-content-wrapper"}>
-                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${mathParallaxOffset}px)` }}>
+                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${(1 - progress) * -(3000 - window.innerWidth)}px)` }}>
                                         {
                                             new Array(1000).fill("math").join(" ")
                                         }
                                     </div>
                                 </div>
                             </div>
-                        </section>
-
-                        <section ref={languageParallaxRef} style={{ height: "calc(100vh + 2000px)" }}>
+                        )} />
+                        <ScrollTracker realScrollHeight={2000} TrackingComponent={({ progress }) => (
                             <div className={"sticky-container"}>
                                 <div className={"sticky-header-container language-color"}>
                                     <div className={"language-header"}>Language</div>
                                 </div>
                                 <div className={"sticky-content-wrapper"}>
-                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${languageParallaxOffset}px)` }}>
+                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${progress * -(3000 - window.innerWidth)}px)` }}>
                                         {
                                             new Array(1000).fill("language").join(" ")
                                         }
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                        <section ref={scienceParallaxRef} style={{ height: "calc(100vh + 2000px)" }}>
+                        )} />
+                        <ScrollTracker realScrollHeight={2000} TrackingComponent={({ progress }) => (
                             <div className={"sticky-container"}>
                                 <div className={"sticky-header-container science-color"}>
                                     <div className={"science-header"}>Science</div>
                                 </div>
                                 <div className={"sticky-content-wrapper"}>
-                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${scienceParallaxOffset}px)` }}>
+                                    <div className={"sticky-content-container"} style={{ transform: `translateX(${(1 - progress) * -(3000 - window.innerWidth)}px)` }}>
                                         {
                                             new Array(1000).fill("science").join(" ")
                                         }
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        )} />
                     </React.Fragment>
                 )
             }
