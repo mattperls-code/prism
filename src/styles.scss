@@ -3,10 +3,6 @@ $black: rgb(40, 40, 40);
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Lao:wght@900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@500&display=swap');
 
 .fade {
     transition: opacity 0.8s, transform 0.8s;
@@ -27,6 +23,7 @@ html body {
     padding: 0;
     width: 100vw;
     overflow-x: hidden;
+    background-color: $white;
 }
 
 @keyframes fade-and-out {
@@ -47,80 +44,139 @@ html body {
     }
 }
 
+section {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+.rainbow-background {
+    background-image: url("https://img.freepik.com/premium-vector/abstract-colorful-painting-background-with-blank-blur-smooth-color-texture-graphic-design_120819-2086.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.header-font {
+    text-align: center;
+    font-family: 'PT Serif', serif;
+    color: $black;
+}
+
+.content-font {
+    font-family: 'Quicksand', sans-serif;
+    color: $black;
+}
+
+.white-text {
+    color: $white;
+}
+
+.large-text {
+    font-size: 96px;
+}
+
+.medium-text {
+    font-size: 60px;
+}
+
+.small-text {
+    font-size: 32px;
+}
+
 .initial-fading-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
+    background-color: $white;
     overflow-y: hidden;
     z-index: 10;
-    background-color: $white;
     animation-name: fade-and-out;
     animation-delay: 4000ms;
     animation-duration: 400ms;
     animation-fill-mode: forwards;
+
+    header {
+        position: absolute;
+        bottom: 40px;
+        width: 100vw;
+        background-size: 300px 80px;
+        background-position: center;
+        background-image: url("https://img.freepik.com/premium-vector/abstract-colorful-painting-background-with-blank-blur-smooth-color-texture-graphic-design_120819-2086.jpg");
+        background-clip: text;
+        color: transparent;
+    }
 }
 
-section {
+.title-page-wrapper {
+    overflow: hidden;
+
+    header {
+        position: absolute;
+        bottom: 40px;
+        width: 100vw;
+    }
+
+    .rainbow-header {
+        background-size: 300px 80px;
+        background-position: center;
+        background-image: url("https://img.freepik.com/premium-vector/abstract-colorful-painting-background-with-blank-blur-smooth-color-texture-graphic-design_120819-2086.jpg");
+        background-clip: text;
+        color: transparent;
+    }
+
+    .caption {
+        margin-bottom: 32px;
+    }
+
+    .animated-caption {
+        margin-bottom: 32px;
+        animation-name: oscillate;
+        animation-delay: 200ms;
+        animation-duration: 1000ms;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+
+    .down-icon {
+        font-size: 16px;
+        color: $black;
+        animation-name: oscillate;
+        animation-duration: 1000ms;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+}
+
+.underlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: $white;
+    filter: drop-shadow(0 0 10px $white);
 }
 
-.header1 {
-    position: absolute;
-    bottom: 40px;
-    width: 100vw;
-    text-align: center;
-    font-size: 96px;
-    font-family: 'PT Serif', serif;
-
-    background-size: 300px 80px;
+.homepage-outline-wrapper {
+    display: flex;
+    width: calc(min(100vw - 80px, 800px));
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0 auto 40px;
+    background-image: url("https://img.freepik.com/premium-vector/abstract-colorful-painting-background-with-blank-blur-smooth-color-texture-graphic-design_120819-2086.jpg");
+    background-size: cover;
     background-position: center;
-    background-image: url(https://img.freepik.com/premium-vector/abstract-colorful-painting-background-with-blank-blur-smooth-color-texture-graphic-design_120819-2086.jpg);
-    background-clip: text;
-    color: transparent;
-}
 
-.header2 {
-    position: absolute;
-    bottom: 40px;
-    width: 100vw;
-    text-align: center;
-    font-size: 96px;
-    font-family: 'PT Serif', serif;
-    color: $black;
-}
-
-.caption1 {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 32px;
-    font-family: 'Quicksand', sans-serif;
-}
-
-.caption2 {
-    margin-bottom: 32px;
-    text-align: center;
-    font-size: 24px;
-    font-family: 'Quicksand', sans-serif;
-    animation-name: oscillate;
-    animation-delay: 200ms;
-    animation-duration: 1000ms;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-.chevron-down-icon {
-    font-size: 16px;
-    color: $black;
-    animation-name: oscillate;
-    animation-duration: 1000ms;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    .homepage-outline-container {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: $white;
+    }
 }
 
 .sticky-container {
@@ -129,57 +185,50 @@ section {
     width: 100vw;
     height: 100vh;
 
-    .sticky-header-container {
+    .rainbow-container {
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-image: url("https://img.freepik.com/premium-vector/abstract-colorful-painting-background-with-blank-blur-smooth-color-texture-graphic-design_120819-2086.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .images-container {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+
+        img {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            filter: brightness(0.5) saturate(200%) contrast(200%);
+        }
+    }
+
+    .text-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100vw;
-        height: calc(100vh - 480px);
-        font-size: 56px;
-        color: $white;
+        z-index: 10;
 
-        .art-header {
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .math-header {
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .language-header {
-            font-family: 'Noto Serif Lao', serif;
-        }
-
-        .science-header {
-            font-family: 'Shantell Sans', cursive;
-        }
-    }
-
-    .art-color {
-        background-color: rgb(230, 70, 100);
-    }
-
-    .math-color {
-        background-color: rgb(42, 112, 187);
-    }
-
-    .language-color {
-        background-color: rgb(240, 149, 46);
-    }
-
-    .science-color {
-        background-color: rgb(49, 157, 62);
-    }
-
-    .sticky-content-wrapper {
-        width: 100vw;
-        height: 480px;
-        overflow: hidden;
-
-        .sticky-content-container {
-            width: 3000px;
-            height: 100%;
-            word-wrap: break-word;
+        div {
+            margin: 0 6px;
+            font-size: 24px;
+            line-height: 60px;
+            color: $white;
+            opacity: 0.5;
         }
     }
 }

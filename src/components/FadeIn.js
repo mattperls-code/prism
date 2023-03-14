@@ -6,7 +6,9 @@ const FadeIn = ({ delay, children }) => {
     const handleFadeElementEvent = () => {
         const box = fadeElementRef.current.getBoundingClientRect()
 
-        setApplyAnimation(window.innerHeight - box.y - box.height > -50)
+        if(box.y < 0.6 * window.innerHeight){
+            setApplyAnimation(true)
+        }
     }
 
     useLayoutEffect(handleFadeElementEvent, [])
